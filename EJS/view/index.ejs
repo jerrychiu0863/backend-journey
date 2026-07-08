@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Curret second: <%= second %></p>
+    <% if (second % 2 === 0) { %>
+      <li>
+        <% items.forEach(function(item){ %>
+          <li><%= item %><li>
+        <% }); %>
+      </li>
+    <% } else { %>
+      <p>No items to display</p>
+    <% } %>
+    <%- htmlContent %>
+    <%- include('footer.ejs') %>
+  </body>
+</html>
