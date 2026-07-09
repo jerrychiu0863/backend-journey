@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="top">
+      <% if(locals.bandName){ %>
+         <h1><%= bandName %></h1>
+      <% } else { %>
+         <h1>Generate Your Band Name</h1>
+      <% } %>
+     
+      <form action="/submit" method="POST">
+        <input type="submit" value="Generate" />
+      </form>
+    </div>
+    <%- include('partials/footer')%>
+  </body>
+</html>
