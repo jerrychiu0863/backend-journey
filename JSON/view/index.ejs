@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="top">
+      <form action="/recipe" method="POST">
+        <input type="submit" value="Chicken" name="choice" />
+        <input type="submit" value="Beef" name="choice" />
+      </form>
+      <%if(locals.recipe) {%>
+        <h1><%= recipe.id %><%= recipe.name %></h1>
+      <%} else {%>
+        <h1>Get recipe</h1>
+      <%}%>
+    </div>
+
+
+    <%- include('partials/footer')%>
+  </body>
+</html>

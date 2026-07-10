@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="top">
+      <h1>Find Something To Do!</h1>
+      <form action="/submit" method="POST">
+        <select name="type">
+          <option value="">--Please choose an option--</option>
+          <option value="education">Education</option>
+          <option value="recreational">Recreation</option>
+        </select>
+        <select name="participants" id="">
+          <option value="">--Please choose an option--</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+        </select>
+        <button type="submit">Go</button>
+      </form>
+      <%if(locals.activity) {%>
+        <p><%= activity.activity%></p>
+      <%} else {%>
+        <p><%= error%></p>
+      <%}%>
+    </div>
+
+    <%- include('partials/footer')%>
+  </body>
+</html>
