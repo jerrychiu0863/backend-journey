@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="top">
+      <form action="/" method="GET">
+        <button type="submit">No auth</button>
+      </form>
+  
+        <button type="button" onclick="window.location.href='/basic-auth'">Basic auth</button>
+  
+      <form action="/api-key" method="GET">
+        <button type="submit">Api key</button>
+      </form>
+        <form action="/token" method="GET">
+        <button type="submit">Token</button>
+      </form>
+      <%if(locals.data) {%>
+        <p><%= data%></p>
+      <%}%>
+      <%if(locals.error) {%>
+        <p><%= locals.error%></p>
+      <%}%>
+    </div>
+   
+
+    <%- include('partials/footer')%>
+  </body>
+</html>
