@@ -11,16 +11,73 @@ const port = 3000;
 const username = "m0863";
 const password = "1786";
 const api_key = "99c74765-42aa-416d-b84a-d4cfef4e602e";
-const token = "1dbfe071-371e-444a-9dcf-2c09e4d54ffa";
+const token = "ab308c82-6ee0-4b09-a220-f34f9d0c953b";
+const config = {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+};
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
+  res.render(__dirname + "/view/index.ejs");
+});
+
+app.post("/api-get", async (req, res) => {
   try {
+    const secretId = req.body.id;
     const response = await axios.get(
-      "https://secrets-api.appbrewery.com/random",
+      `https://secrets-api.appbrewery.com/secrets/${secretId}}`,
+      config,
     );
+    const result = response.data;
+    res.render(__dirname + "/view/index.ejs", {
+      data: JSON.stringify(result),
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.render(__dirname + "/view/index.ejs", {
+      error: "No result",
+    });
+  }
+});
+
+app.post("/api-post", async (req, res) => {
+  try {
+    const response = await axios.post(
+      "https://secrets-api.appbrewery.com/secrets",
+      {
+        secret: req.body.secret,
+        score: req.body.score,
+      },
+      config,
+    );
+    const result = response.data;
+    res.render(__dirname + "/view/index.ejs", {
+      data: JSON.stringify(result),
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.render(__dirname + "/view/index.ejs", {
+      error: "No result",
+    });
+  }
+});
+
+app.post("/api-put", async (req, res) => {
+  try {
+    const secretId = req.body.id;
+    const response = await axios.put(
+      `https://secrets-api.appbrewery.com/secrets/${secretId}`,
+      {
+        secret: req.body.secret,
+        score: req.body.score,
+      },
+      config,
+    );
+
     const result = response.data;
     res.render(__dirname + "/view/index.ejs", {
       data: JSON.stringify(result),
@@ -32,20 +89,21 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.get("/basic-auth", async (req, res) => {
+app.post("/api-patch", async (req, res) => {
   try {
-    const response = await axios.get(
-      "https://secrets-api.appbrewery.com/all?page=1",
+    const secretId = req.body.id;
+    const response = await axios.patch(
+      `https://secrets-api.appbrewery.com/secrets/${secretId}`,
       {
-        auth: {
-          username,
-          password,
-        },
+        secret: req.body.secret,
+        score: req.body.score,
       },
+      config,
     );
+
     const result = response.data;
     res.render(__dirname + "/view/index.ejs", {
-      data: JSON.stringify(result[Math.floor(Math.random() * result.length)]),
+      data: JSON.stringify(result),
     });
   } catch (error) {
     res.render(__dirname + "/view/index.ejs", {
@@ -54,32 +112,14 @@ app.get("/basic-auth", async (req, res) => {
   }
 });
 
-app.get("/api-key", async (req, res) => {
+app.post("/api-delete", async (req, res) => {
   try {
-    const response = await axios.get(
-      `https://secrets-api.appbrewery.com/filter?score=7&apiKey=${api_key}`,
+    const secretId = req.body.id;
+    const response = await axios.delete(
+      `https://secrets-api.appbrewery.com/secrets/${secretId}`,
+      config,
     );
-    const result = response.data;
-    res.render(__dirname + "/view/index.ejs", {
-      data: JSON.stringify(result[Math.floor(Math.random() * result.length)]),
-    });
-  } catch (error) {
-    res.render(__dirname + "/view/index.ejs", {
-      error: "No result",
-    });
-  }
-});
 
-app.get("/token", async (req, res) => {
-  try {
-    const response = await axios.get(
-      "https://secrets-api.appbrewery.com/secrets/2",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
     const result = response.data;
     res.render(__dirname + "/view/index.ejs", {
       data: JSON.stringify(result),
