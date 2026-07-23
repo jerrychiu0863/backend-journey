@@ -32,6 +32,16 @@ This repository documents my learning journey in backend web development.
 * Loops
 * Creating reusable partials
 
+### APIs
+* Understanding what APIs are and how they work
+* Making HTTP requests
+* Using REST APIs
+* Working with JSON data
+* Sending GET and POST requests
+* Using Axios to consume APIs
+* Handling API responses and errors
+* Integrating third-party APIs into Express applications
+
 ---
 
 ## 📖 Purpose
