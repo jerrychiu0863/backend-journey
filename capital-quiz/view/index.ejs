@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="top" id="app">
+      <form action="/submit" method="post">
+        <h3>Total score:<%= locals.totalScore ? totalScore : '0'%></h3>
+        <h1><%= question.country%></h1>
+        <div>
+          <input type="text" name="answer" placeholder="Answer the capital" autofocus />
+        </div>
+        <button type="submit">Submit
+          <%if(locals.wasCorrect) {%>
+            <span>✔</span>
+          <%} else {%>
+            <span>❌</span>
+          <%}%>
+        </button>
+      </form>
+    </div>
+    <script>
+      var wasCorrect = '<%= locals.wasCorrect%>'
+      if(wasCorrect === 'false') {
+        alert('Final Score: <%=locals.totalScore%>')
+        document.getElementById('app').innerHTML = '<a href="/">Restart</a>'
+      }
+    </script>
+  </body>
+</html>
