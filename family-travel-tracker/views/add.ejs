@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travel Tracker</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <style>
+      input:checked + label > div {
+        border: 1px solid white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <form action="/new" method="post">
+      <label for="tab">Add new member</label>
+      <input type="text" name="name" />
+      <p><%=locals.error%></p>
+      <input
+        type="radio"
+        name="color"
+        id="red"
+        value="red"
+        style="display: none"
+      />
+      <label for="red">
+        <div style="width: 20px; height: 20px; background-color: red"></div>
+      </label>
+
+      <input
+        type="radio"
+        name="color"
+        id="yellow"
+        value="yellow"
+        style="display: none"
+      />
+      <label for="yellow">
+        <div style="width: 20px; height: 20px; background-color: yellow"></div>
+      </label>
+
+      <button type="submit">Submit</button>
+    </form>
+    <button type="button" onclick="window.location.href = '/'">
+      Main page
+    </button>
+  </body>
+</html>
