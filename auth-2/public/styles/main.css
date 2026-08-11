@@ -1,0 +1,16 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  background: #21252b;
+  color: #d3ddef;
+  display: grid;
+  place-content: center;
+}
