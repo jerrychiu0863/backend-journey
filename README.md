@@ -42,6 +42,22 @@ This repository documents my learning journey in backend web development.
 * Handling API responses and errors
 * Integrating third-party APIs into Express applications
 
+### SQL & PostgreSQL
+Understanding relational databases
+Creating databases and tables
+Defining columns and data types
+Inserting, updating, selecting, and deleting data
+Using SQL queries
+Filtering and sorting data
+Using primary keys
+Understanding foreign keys
+Working with table relationships
+Using constraints
+Understanding UNIQUE, NOT NULL, and CHECK constraints
+Modifying table structures
+Connecting PostgreSQL with Node.js and Express
+Performing database operations from an Express application
+
 ---
 
 ## 📖 Purpose
@@ -57,8 +73,15 @@ This repository serves as:
 
 ## 📅 Current Status
 
-I am currently studying the fundamentals of:
+Currently learning authentication and user management.
 
-* Node.js
-* Express.js
-* EJS templating
+Topics include:
+
+Understanding authentication vs. authorization
+User registration and login
+Handling passwords securely
+Password hashing
+Sessions and cookies
+Authentication middleware
+Protecting routes
+Managing authenticated users
