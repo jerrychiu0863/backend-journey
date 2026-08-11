@@ -20,7 +20,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   password: process.env.DB_PASSWORD,
-  database: "world",
+  database: "secrets",
   post: 5432,
 });
 
@@ -38,12 +38,50 @@ app.get("/register", (req, res) => {
   res.render(__dirname + "/views/register.ejs");
 });
 
-app.post("/register", (req, res) => {
-  console.log(req.body);
+app.post("/register", async (req, res) => {
+  const { username, password } = req.body;
+  // console.log(`Username: ${username};Password:${password}`);
+  try {
+    const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [
+      username,
+    ]);
+    if (checkResult.rows.length > 0) {
+      return res.send("Email has been registered! Try log in!");
+    }
+    const result = await db.query(
+      "INSERT INTO users(email, password) VALUES($1, $2) RETURNING *",
+      [username, password],
+    );
+    console.log(result);
+    res.render(__dirname + "/views/secret.ejs");
+  } catch (err) {
+    console.log(err);
+    res.send("Server Error!");
+  }
 });
 
-app.post("/login", (req, res) => {
-  console.log(req.body);
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  // console.log(`Username: ${username};Password:${password}`);
+  try {
+    const result = await db.query("SELECT * FROM users WHERE email = $1", [
+      username,
+    ]);
+    // Check if user exists
+    if (result.rows.length !== 0) {
+      const user = result.rows[0];
+      // Check if password matches
+      if (user.password === password) {
+        return res.render(__dirname + "/views/secret.ejs");
+      }
+      return res.send("Wrong password!");
+    } else {
+      return res.send("Email not registered!");
+    }
+  } catch (err) {
+    console.log(err);
+    res.send("Server Error!");
+  }
 });
 
 app.listen(port, () => {
