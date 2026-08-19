@@ -87,9 +87,3 @@ Topics include:
 - Authentication middleware
 - Protecting routes
 - Managing authenticated users
-- Handling passwords securely
-- Password hashing
-- Sessions and cookies
-- Authentication middleware
-- Protecting routes
-- Managing authenticated users
